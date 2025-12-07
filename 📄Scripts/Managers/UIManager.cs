@@ -31,6 +31,7 @@ public class UIManager : MonoBehaviour
     public Button GameOverRestartButton; // restart costs 100 coins
     public Button GameOverMainMenuButton;
 
+    //Note: Commented on 06Dec25
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -39,14 +40,27 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        // ensure initial state is correct
-        ShowMainMenu(true);
-        ShowGameplayUI(false);
-        ShowPauseMenu(false);
-        ShowUpgradeMenu(false);
-        ShowGameOver(false);
         RefreshEconomyTexts();
+
+        // Determine what UI to show based on scene
+        if (LevelManager.Instance.IsGameplayScene())
+        {
+            ShowMainMenu(false);
+            ShowGameplayUI(true);
+            ShowPauseMenu(false);
+            ShowUpgradeMenu(false);
+            ShowGameOver(false);
+        }
+        else
+        {
+            ShowMainMenu(true);
+            ShowGameplayUI(false);
+            ShowPauseMenu(false);
+            ShowUpgradeMenu(false);
+            ShowGameOver(false);
+        }
     }
+
 
     public void ShowMainMenu(bool v) => SetActiveSafe(MainMenuPanel, v);
     public void ShowGameplayUI(bool v) => SetActiveSafe(GameplayHUD, v);

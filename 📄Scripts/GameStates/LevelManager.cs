@@ -7,7 +7,7 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance { get; private set; }
 
-    public int CurrentLevelNumber { get; private set; } = 0; // one-based
+    public int CurrentLevelNumber { get; private set; } = 1; // one-based
 
     // event for level cleared
     public delegate void LevelClearedHandler();
@@ -20,6 +20,7 @@ public class LevelManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         ParseCurrentSceneIndex();
+        
     }
 
     private void Start()
@@ -41,7 +42,6 @@ public class LevelManager : MonoBehaviour
                 CurrentLevelNumber = n;
                 
             }
-
         }
     }
 
@@ -59,12 +59,15 @@ public class LevelManager : MonoBehaviour
                 // dispatch once
                 OnLevelCleared?.Invoke();
                 // Prevent repeated invocation; move to upgrade state via GameManager
-                GameManager.Instance.StateMachine.ChangeState(new UpgradeState(GameManager.Instance.StateMachine));
+                //GameManager.Instance.StateMachine.ChangeState(new UpgradeState(GameManager.Instance.StateMachine));
+                GameManager.Instance.StateMachine.ChangeState(
+                    new UpgradeState(GameManager.Instance.StateMachine)
+                );
             }
         }
     }
 
-    public void LoadNextLevel()
+    /* public void LoadNextLevel()
     {
         int next = CurrentLevelNumber + 1;
         string nextName = $"Level{next}";
@@ -72,7 +75,27 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene(nextName);
         CurrentLevelNumber = next;
         GameManager.Instance.uiManager?.SetLevelText(CurrentLevelNumber);
+    } */
+    public void LoadNextLevel()
+    {
+        Debug.Log("Current level is ==="+ CurrentLevelNumber.ToString());
+        int next = CurrentLevelNumber + 1;
+        string nextName = "Level" + next;
+        Debug.Log("Next level name === "+ nextName);
+
+        if (Application.CanStreamedLevelBeLoaded(nextName))
+        {
+            Debug.Log("CanStreamedLevelBeLoaded");
+            SceneManager.LoadScene(nextName);
+            CurrentLevelNumber = next;
+        }
+        else
+        {
+            Debug.Log("No more levels! Returning to Main Menu.");
+            SceneManager.LoadScene("Level0");
+        }
     }
+
 
     public void ReloadCurrentLevel()
     {
@@ -86,4 +109,11 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene(name);
         CurrentLevelNumber = levelNumber;
     }
+
+    public bool IsGameplayScene()
+    {
+        string s = SceneManager.GetActiveScene().name;
+        return s.StartsWith("Level") && s != "Level0";
+    }
+
 }

@@ -9,10 +9,15 @@ public class UIButtonRouter : MonoBehaviour
     public void OnPlayPressed()
     {
         fsm.ChangeState(new GameplayState(fsm));
-        Debug.Log("State == "+fsm.Current.ToString());
+        DebugConsolePrintState();
         // If level scenes are separate and not loaded yet:
-        //Note: 06Dec25 Is this really needed?
-        //LevelManager.Instance.LoadLevelDirect(1);
+        //Note: 06Dec25 Is this really needed? Uncommented
+        LevelManager.Instance.LoadLevelDirect(1);
+    }
+
+    void DebugConsolePrintState()
+    {
+        Debug.Log("State == " + fsm.Current.ToString());
     }
 
     public void OnQuitPressed()
@@ -27,17 +32,21 @@ public class UIButtonRouter : MonoBehaviour
     // Pause menu
     public void OnPausePressed()
     {
+        Debug.Log("Pause Pressed");
         fsm.ChangeState(new PauseState(fsm));
+        DebugConsolePrintState();
     }
 
     public void OnResumePressed()
     {
         fsm.ChangeState(new GameplayState(fsm));
+        DebugConsolePrintState();
     }
 
     public void OnPauseMainMenuPressed()
     {
         fsm.ChangeState(new MainMenuState(fsm));
+        DebugConsolePrintState();
     }
 
     // Upgrade menu
@@ -64,8 +73,10 @@ public class UIButtonRouter : MonoBehaviour
 
     public void OnNextLevelPressed()
     {
-        var up = new UpgradeState(fsm);
-        up.OnNextLevel();
+        /* var up = new UpgradeState(fsm);
+        up.OnNextLevel(); */
+        LevelManager.Instance.LoadNextLevel();
+        DebugConsolePrintState();
     }
 
     // Game Over
@@ -73,11 +84,13 @@ public class UIButtonRouter : MonoBehaviour
     {
         var go = new GameOverState(fsm);
         go.OnMainMenu();
+        DebugConsolePrintState();
     }
 
     public void OnGameOverRestartPressed()
     {
         var go = new GameOverState(fsm);
         go.OnRestartLevel();
+        DebugConsolePrintState();
     }
 }

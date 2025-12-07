@@ -27,12 +27,21 @@ public class UpgradeState : IState
     public void OnBuyROF() { GameManager.Instance.Upgrades.TryBuyROF(); }
     public void OnBuyDamage() { GameManager.Instance.Upgrades.TryBuyDamage(); }
 
-    public void OnNextLevel()
+    /* public void OnNextLevel()
     {
         GameManager.Instance.Upgrades.Save();
         GameManager.Instance.Economy.Save();
         LevelManager.Instance.LoadNextLevel();
         // Move to GameplayState after load - loading scene will re-run GameManager Start; to be safe:
         fsm.ChangeState(new GameplayState(fsm));
-    }
+    } */
+    /* public void OnNextLevel()
+    {
+        GameManager.Instance.Upgrades.Save();
+        GameManager.Instance.Economy.Save();
+
+        // Load next level only
+        LevelManager.Instance.LoadNextLevel();
+    } */
+
 }

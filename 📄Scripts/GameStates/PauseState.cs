@@ -5,6 +5,7 @@ public class PauseState : IState
 {
     private readonly GameStateMachine fsm;
     public PauseState(GameStateMachine fsm) { this.fsm = fsm; }
+    UIManager uIManager;
 
     public void Enter()
     {
