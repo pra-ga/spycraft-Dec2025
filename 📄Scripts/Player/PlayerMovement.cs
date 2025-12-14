@@ -5,9 +5,13 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
-    public float moveSpeed = 5f;
+    public float moveSpeed;
     public float rotationSpeed = 10f;
     public bool HasMovementInput => moveInput.sqrMagnitude > 0.01f;
+    
+    [Header("Base Stats")]
+    public float baseMoveSpeed = 5f;
+
 
     [Header("References")]
     public Transform cameraTransform;

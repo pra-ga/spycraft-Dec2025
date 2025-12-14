@@ -4,11 +4,16 @@ public class PlayerCombat : MonoBehaviour
 {
     [Header("Combat Settings")]
     public float detectionRange = 10f;
-    public float fireRate = 0.5f;
+    public float fireRate;
     public bool HasTarget => currentTarget != null;
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] Transform firePoint;
     public Vector3 dir;
+    public float currentDamage;
+
+    [Header("Base Stats")]
+    public float baseFireRate = 0.5f;
+    public float baseDamage = 10f;
 
     [Header("References")]
     public Animator animator;
@@ -112,6 +117,7 @@ public class PlayerCombat : MonoBehaviour
             
             // Optional: set bullet damage, speed, or target if your bullet script has it
             Bullet b = bullet.GetComponent<Bullet>();
+            b.damage = currentDamage; 
             if (b != null)
             {
                 b.SetTarget(currentTarget); // assumes your bullet script has this method

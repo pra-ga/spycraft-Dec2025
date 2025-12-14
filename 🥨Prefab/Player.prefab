@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4369490624488557128}
   - component: {fileID: 7130748198869218594}
   - component: {fileID: 4664870113529084146}
+  - component: {fileID: 8711581199320153240}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -202,6 +203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   moveSpeed: 5
   rotationSpeed: 10
+  baseMoveSpeed: 5
   cameraTransform: {fileID: 0}
   animator: {fileID: 3518831159692477416}
 --- !u!114 &7130748198869218594
@@ -221,6 +223,9 @@ MonoBehaviour:
   bulletPrefab: {fileID: 6255530655130090817, guid: 74222f171bb79a349b90ae9f2883c9ba, type: 3}
   firePoint: {fileID: 4781522150639244747}
   dir: {x: 0, y: 0, z: 0}
+  currentDamage: 0
+  baseFireRate: 0.5
+  baseDamage: 10
   animator: {fileID: 3518831159692477416}
   enemyMask:
     serializedVersion: 2
@@ -238,6 +243,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   MaxHP: 100
+--- !u!114 &8711581199320153240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8880098671715981439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe9838a553e1b4546b791f26aba8ee18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeApplier
 --- !u!1001 &3157943675591943477
 PrefabInstance:
   m_ObjectHideFlags: 0

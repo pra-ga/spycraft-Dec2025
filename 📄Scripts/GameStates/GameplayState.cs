@@ -25,6 +25,17 @@ public class GameplayState : IState
 
         // Hook to player death
         PlayerHealth.OnPlayerDeath += OnPlayerDeath;
+
+        Debug.Log("---- Gameplay State ENTER ----");
+
+        // Apply upgrades once player exists
+        var player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            var applier = player.GetComponent<UpgradeApplier>();
+            if (applier != null)
+                applier.ApplyUpgrades();
+        }
     }
 
     public void Exit()

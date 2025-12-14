@@ -1,0 +1,9 @@
+- Hook up upgrades to player values
+- Health bars
+- Enemy should damage player: PlayerHealth.cs
+- Enemy varity: Attacking with gun
+- Trigger bomb - Player
+- Level design
+- Clear playerPrefs
+
+

@@ -5,7 +5,7 @@ public class Bullet : MonoBehaviour
     [Header("Bullet Settings")]
     public float speed = 20f;
     public float lifetime = 5f; // Destroy bullet after 5 seconds if it doesn't hit
-    private float damage = 10f;
+    public float damage;
 
     private Transform target; // optional for homing bullets; currently unused
     PlayerCombat playerCombat;

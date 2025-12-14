@@ -93,4 +93,11 @@ public class UIButtonRouter : MonoBehaviour
         go.OnRestartLevel();
         DebugConsolePrintState();
     }
+
+    public void ClearAllPrefs()
+    {
+        PlayerPrefs.DeleteAll();
+        Debug.Log("All PlayerPrefs cleared.");
+        GameManager.Instance.uiManager.RefreshEconomyTexts();
+    }
 }
